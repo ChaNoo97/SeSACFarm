@@ -52,7 +52,9 @@ class SignInViewController: BaseViewController {
 	
 	@objc func logInButtonClicked() {
 		viewModel.postUserLogin {
-			print("뷰 전환")
+			guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+			windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+			windowScene.windows.first?.makeKeyAndVisible()
 		}
 	}
 	

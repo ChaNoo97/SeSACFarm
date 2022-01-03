@@ -24,6 +24,7 @@ enum Methood: String {
 enum Endpoint {
 	case signUp
 	case logIn
+	case posts
 	
 }
 
@@ -34,6 +35,8 @@ extension Endpoint {
 			return .makeEndPoint("/auth/local/register")
 		case .logIn:
 			return .makeEndPoint("/auth/local")
+		case .posts:
+			return .makeEndPoint("/posts")
 		}
 	}
 }

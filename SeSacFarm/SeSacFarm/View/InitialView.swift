@@ -31,7 +31,6 @@ class InitialView: UIView, ViewProtocol{
 		
 		imageView.backgroundColor = .blue
 		
-		
 		titleLable.text = "당신 근처의 새싹농장"
 		titleLable.font = .boldSystemFont(ofSize: 20)
 		titleLable.textAlignment = .center

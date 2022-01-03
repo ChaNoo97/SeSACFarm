@@ -25,8 +25,15 @@
 		FEE1F3F62780C03B00773890 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3F52780C03B00773890 /* SignUpViewModel.swift */; };
 		FEE1F3FA2780C0FA00773890 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3F92780C0FA00773890 /* Observable.swift */; };
 		FEE1F3FC2780C44B00773890 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3FB2780C44B00773890 /* APIService.swift */; };
-		FEE1F4002780C84300773890 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3FF2780C84300773890 /* User.swift */; };
+		FEE1F4002780C84300773890 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3FF2780C84300773890 /* UserInfo.swift */; };
 		FEE1F4022780C97B00773890 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F4012780C97B00773890 /* SignInViewModel.swift */; };
+		FEE1F4322782D09E00773890 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F4312782D09E00773890 /* MainViewController.swift */; };
+		FEE1F4342782DEAA00773890 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F4332782DEAA00773890 /* MainView.swift */; };
+		FEE1F4362782E0B000773890 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F4352782E0B000773890 /* MainTableViewCell.swift */; };
+		FEE1F4382782E59900773890 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F4372782E59900773890 /* UITableViewExtension.swift */; };
+		FEE1F43A2783294600773890 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F4392783294600773890 /* MainViewModel.swift */; };
+		FEE1F43C2783341600773890 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F43B2783341600773890 /* Posts.swift */; };
+		FEE1F43E2783616D00773890 /* TableViewCellRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F43D2783616D00773890 /* TableViewCellRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,8 +56,15 @@
 		FEE1F3F52780C03B00773890 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		FEE1F3F92780C0FA00773890 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		FEE1F3FB2780C44B00773890 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		FEE1F3FF2780C84300773890 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FEE1F3FF2780C84300773890 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FEE1F4012780C97B00773890 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		FEE1F4312782D09E00773890 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		FEE1F4332782DEAA00773890 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		FEE1F4352782E0B000773890 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		FEE1F4372782E59900773890 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		FEE1F4392783294600773890 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		FEE1F43B2783341600773890 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		FEE1F43D2783616D00773890 /* TableViewCellRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +121,9 @@
 				FEE1F3EB277F448C00773890 /* SignUpView.swift */,
 				FEE1F3F127804E0900773890 /* SignInViewController.swift */,
 				FEE1F3EF27804DFC00773890 /* SignInView.swift */,
+				FEE1F4312782D09E00773890 /* MainViewController.swift */,
+				FEE1F4352782E0B000773890 /* MainTableViewCell.swift */,
+				FEE1F4332782DEAA00773890 /* MainView.swift */,
 				FEE1F3E5277E151700773890 /* New Group */,
 				FEE1F3E1277E0F2400773890 /* ShareView */,
 			);
@@ -118,6 +135,7 @@
 			children = (
 				FEE1F3F52780C03B00773890 /* SignUpViewModel.swift */,
 				FEE1F4012780C97B00773890 /* SignInViewModel.swift */,
+				FEE1F4392783294600773890 /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -125,7 +143,8 @@
 		FEE1F3DD277E0ED900773890 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FEE1F3FF2780C84300773890 /* User.swift */,
+				FEE1F3FF2780C84300773890 /* UserInfo.swift */,
+				FEE1F43B2783341600773890 /* Posts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,6 +171,8 @@
 			children = (
 				FEE1F3E7277E153800773890 /* ViewProtocol.swift */,
 				FEE1F3E9277E17BF00773890 /* BaseViewController.swift */,
+				FEE1F4372782E59900773890 /* UITableViewExtension.swift */,
+				FEE1F43D2783616D00773890 /* TableViewCellRepresentable.swift */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -237,18 +258,25 @@
 				FEE1F3F62780C03B00773890 /* SignUpViewModel.swift in Sources */,
 				FEE1F3D7277E0C6A00773890 /* InitialViewController.swift in Sources */,
 				FEE1F3E0277E0F0000773890 /* InitialView.swift in Sources */,
+				FEE1F43C2783341600773890 /* Posts.swift in Sources */,
+				FEE1F4342782DEAA00773890 /* MainView.swift in Sources */,
+				FEE1F4382782E59900773890 /* UITableViewExtension.swift in Sources */,
 				FEE1F4022780C97B00773890 /* SignInViewModel.swift in Sources */,
 				FEE1F3C3277E0AAF00773890 /* AppDelegate.swift in Sources */,
 				FEE1F3C5277E0AAF00773890 /* SceneDelegate.swift in Sources */,
-				FEE1F4002780C84300773890 /* User.swift in Sources */,
+				FEE1F4002780C84300773890 /* UserInfo.swift in Sources */,
 				FEE1F3F027804DFC00773890 /* SignInView.swift in Sources */,
+				FEE1F43E2783616D00773890 /* TableViewCellRepresentable.swift in Sources */,
 				FEE1F3EC277F448C00773890 /* SignUpView.swift in Sources */,
 				FEE1F3E8277E153800773890 /* ViewProtocol.swift in Sources */,
 				FEE1F3EE277F45B300773890 /* SignUpViewController.swift in Sources */,
+				FEE1F4362782E0B000773890 /* MainTableViewCell.swift in Sources */,
 				FEE1F3FA2780C0FA00773890 /* Observable.swift in Sources */,
 				FEE1F3EA277E17BF00773890 /* BaseViewController.swift in Sources */,
+				FEE1F4322782D09E00773890 /* MainViewController.swift in Sources */,
 				FEE1F3F427809E3E00773890 /* Endpoint.swift in Sources */,
 				FEE1F3E3277E0F6300773890 /* MainButton.swift in Sources */,
+				FEE1F43A2783294600773890 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,18 @@ class InitialViewController: BaseViewController {
 		setupLabelTap()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		if UserDefaults.standard.string(forKey: "jwt") != nil {
+			guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+			windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+			windowScene.windows.first?.makeKeyAndVisible()
+		}
+		
+		
+	}
+	
 	override func configure() {
 		super.configure()
 	}
