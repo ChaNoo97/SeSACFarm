@@ -11,7 +11,8 @@ import SnapKit
 class MainViewController: BaseViewController {
 	
 	let mainView = MainView()
-	let viewModel = MainViewModel()
+	let mainViewModel = MainViewModel()
+	
 	
 	override func loadView() {
 		self.view = mainView
@@ -19,7 +20,7 @@ class MainViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		viewModel.postsGet {
+		mainViewModel.postsGet {
 			self.mainView.tableView.reloadData()
 		}
 	}
@@ -40,26 +41,36 @@ class MainViewController: BaseViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return viewModel.numberOfSection
+		return mainViewModel.numberOfSection
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return viewModel.numberOfRowsInSection
+		return mainViewModel.numberOfRowsInSection
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier, for: indexPath) as! MainTableViewCell
-		let data = viewModel.cellForRowAt(mainView.tableView, indexPath: indexPath)
+		let data = mainViewModel.cellForRowAt(mainView.tableView, indexPath: indexPath)
 		let count = data.comments.count
 		cell.writer.text = " \(data.user.username) "
 		cell.content.text = data.text
-		cell.date.text = viewModel.dateFormat(data.updatedAt)
+		cell.date.text = mainViewModel.dateFormat(data.updatedAt)
 		if count == 0 {
 			cell.commentStatus.text = "댓글쓰기"
 		} else {
 			cell.commentStatus.text = "댓글 \(count)"
 		}
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let row = indexPath.row
+		let vc = PostViewController()
+		vc.viewModel.id = mainViewModel.posts.value[row].id
+		vc.viewModel.content = mainViewModel.posts.value[row].text
+		vc.viewModel.date = mainViewModel.posts.value[row].updatedAt
+		vc.viewModel.name = mainViewModel.posts.value[row].user.username
+		navigationController?.pushViewController(vc, animated: true)
 	}
 	
 }

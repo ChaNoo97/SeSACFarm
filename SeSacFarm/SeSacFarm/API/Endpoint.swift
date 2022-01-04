@@ -25,7 +25,7 @@ enum Endpoint {
 	case signUp
 	case logIn
 	case posts
-	
+	case comments(id: Int)
 }
 
 extension Endpoint {
@@ -37,6 +37,8 @@ extension Endpoint {
 			return .makeEndPoint("/auth/local")
 		case .posts:
 			return .makeEndPoint("/posts")
+		case .comments(id: let id):
+			return .makeEndPoint("/comments?post=\(id)")
 		}
 	}
 }

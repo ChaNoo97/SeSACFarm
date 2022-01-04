@@ -33,6 +33,16 @@ class APIService {
 		URLSession.request(endpoint: request, completion: completion)
 	}
 	
+	static func fetchCommetns(postId: Int, completion: @escaping (BoardComments?, APIError?) -> Void) {
+		var request = URLRequest(url: Endpoint.comments(id: postId).url)
+		request.httpMethod = Methood.GET.rawValue
+		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
+			return
+		}
+		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
+		URLSession.request(endpoint: request, completion: completion)
+	}
+	
 //	static func writePost(completion: @escaping (Posts?, APIError?) -> Void) {
 //		var request = URLRequest(url: Endpoint.posts.url)
 //		request.httpMethod = Methood.GET.rawValue

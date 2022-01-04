@@ -26,6 +26,19 @@ class MainViewModel {
 			completion()
 		}
 	}
+	
+	func dateFormat(_ updateAt: String) -> String {
+		let dateFormatter = DateFormatter()
+		
+		let splitDate = String(updateAt.split(separator: "T")[0])
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		guard let convertDate = dateFormatter.date(from: splitDate) else {
+			return updateAt
+		}
+		dateFormatter.dateFormat = "MM/dd"
+		let convertStr = dateFormatter.string(from: convertDate)
+		return convertStr
+	}
 }
 
 extension MainViewModel: TableViewCellRepresentable {
@@ -42,18 +55,4 @@ extension MainViewModel: TableViewCellRepresentable {
 		let row = indexPath.row
 		return posts.value[row]
 	}
-	
-	func dateFormat(_ updateAt: String) -> String {
-		let dateFormatter = DateFormatter()
-		
-		let splitDate = String(updateAt.split(separator: "T")[0])
-		dateFormatter.dateFormat = "yyyy-MM-dd"
-		guard let convertDate = dateFormatter.date(from: splitDate) else {
-			return updateAt
-		}
-		dateFormatter.dateFormat = "MM/dd"
-		let convertStr = dateFormatter.string(from: convertDate)
-		return convertStr
-	}
-	
 }

@@ -50,9 +50,10 @@ class PostCommentCell: UITableViewCell, ViewProtocol {
 	}
 	
 	func setUpConstranits() {
-		[topView, commentUserName, comment, bottomView].forEach {
+		[topView, commentUserName, settingImage ,comment, bottomView].forEach {
 			contentView.addSubview($0)
 		}
+		
 		topView.snp.makeConstraints {
 			$0.top.leading.trailing.equalTo(contentView)
 			$0.height.equalTo(10)
