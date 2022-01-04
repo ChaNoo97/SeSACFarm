@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewModel {
 	
-	var posts = Observable(Posts())
+	var posts = Observable(Boards())
 	var writer: Observable<String> = Observable("")
 	
 	func postsGet(completion: @escaping () -> Void) {
@@ -37,11 +37,8 @@ extension MainViewModel: TableViewCellRepresentable {
 		return posts.value.count
 	}
 	
-	var heightOfRowAt: CGFloat {
-		return 160
-	}
 	
-	func cellForRowAt(_ tableview: UITableView, indexPath: IndexPath) -> Post {
+	func cellForRowAt(_ tableview: UITableView, indexPath: IndexPath) -> Board {
 		let row = indexPath.row
 		return posts.value[row]
 	}

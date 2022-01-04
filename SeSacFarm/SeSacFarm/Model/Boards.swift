@@ -13,7 +13,7 @@
 import Foundation
 
 // MARK: - Post
-struct Post: Codable {
+struct Board: Codable {
 	let id: Int
 	let text: String
 	let user: User
@@ -48,12 +48,11 @@ struct User: Codable {
 	let username, email: String
 	let provider: Provider
 	let confirmed: Bool
-	let blocked: Bool?
 	let role: Int
 	let createdAt, updatedAt: String
 
 	enum CodingKeys: String, CodingKey {
-		case id, username, email, provider, confirmed, blocked, role
+		case id, username, email, provider, confirmed, role
 		case createdAt = "created_at"
 		case updatedAt = "updated_at"
 	}
@@ -63,5 +62,5 @@ enum Provider: String, Codable {
 	case local = "local"
 }
 
-typealias Posts = [Post]
+typealias Boards = [Board]
 

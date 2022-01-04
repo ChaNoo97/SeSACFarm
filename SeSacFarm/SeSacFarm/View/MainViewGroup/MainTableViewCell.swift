@@ -90,8 +90,5 @@ class MainTableViewCell: UITableViewCell, ViewProtocol {
 			$0.height.equalTo(5)
 			$0.bottom.equalTo(contentView.snp.bottom)
 		}
-		
 	}
-	
-	
 }

@@ -23,7 +23,7 @@ class APIService {
 		URLSession.request(endpoint: request, completion: completion)
 	}
 	
-	static func fetchPosts(completion: @escaping (Posts?, APIError?) -> Void) {
+	static func fetchPosts(completion: @escaping (Boards?, APIError?) -> Void) {
 		var request = URLRequest(url: Endpoint.posts.url)
 		request.httpMethod = Methood.GET.rawValue
 		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {

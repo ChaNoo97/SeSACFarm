@@ -51,7 +51,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier, for: indexPath) as! MainTableViewCell
 		let data = viewModel.cellForRowAt(mainView.tableView, indexPath: indexPath)
 		let count = data.comments.count
-		cell.writer.text = data.user.username
+		cell.writer.text = " \(data.user.username) "
 		cell.content.text = data.text
 		cell.date.text = viewModel.dateFormat(data.updatedAt)
 		if count == 0 {
