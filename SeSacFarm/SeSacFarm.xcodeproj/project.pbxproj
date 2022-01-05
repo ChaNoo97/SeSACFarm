@@ -39,6 +39,9 @@
 		FEE1F452278418B200773890 /* PostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F451278418B200773890 /* PostCommentCell.swift */; };
 		FEE1F4542784376700773890 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F4532784376700773890 /* PostViewModel.swift */; };
 		FEE1F45627843D7800773890 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F45527843D7800773890 /* Comments.swift */; };
+		FEE1F45F27856ABD00773890 /* EdtingPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F45E27856ABD00773890 /* EdtingPostViewController.swift */; };
+		FEE1F46127856ACA00773890 /* EdtingPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F46027856ACA00773890 /* EdtingPostView.swift */; };
+		FEE1F463278570DF00773890 /* EdtingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F462278570DF00773890 /* EdtingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +78,9 @@
 		FEE1F451278418B200773890 /* PostCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentCell.swift; sourceTree = "<group>"; };
 		FEE1F4532784376700773890 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		FEE1F45527843D7800773890 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
+		FEE1F45E27856ABD00773890 /* EdtingPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdtingPostViewController.swift; sourceTree = "<group>"; };
+		FEE1F46027856ACA00773890 /* EdtingPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdtingPostView.swift; sourceTree = "<group>"; };
+		FEE1F462278570DF00773890 /* EdtingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdtingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,7 @@
 		FEE1F3DB277E0EC700773890 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FEE1F45D27856AA400773890 /* EdtingPostViewGroup */,
 				FEE1F4462784142C00773890 /* InitialViewGroup */,
 				FEE1F4472784144A00773890 /* SignUpViewGroup */,
 				FEE1F4482784145E00773890 /* SignInViewGroup */,
@@ -143,6 +150,7 @@
 				FEE1F4012780C97B00773890 /* SignInViewModel.swift */,
 				FEE1F4392783294600773890 /* MainViewModel.swift */,
 				FEE1F4532784376700773890 /* PostViewModel.swift */,
+				FEE1F462278570DF00773890 /* EdtingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -230,6 +238,15 @@
 				FEE1F451278418B200773890 /* PostCommentCell.swift */,
 			);
 			path = PostViewGroup;
+			sourceTree = "<group>";
+		};
+		FEE1F45D27856AA400773890 /* EdtingPostViewGroup */ = {
+			isa = PBXGroup;
+			children = (
+				FEE1F45E27856ABD00773890 /* EdtingPostViewController.swift */,
+				FEE1F46027856ACA00773890 /* EdtingPostView.swift */,
+			);
+			path = EdtingPostViewGroup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,13 +344,16 @@
 				FEE1F3F027804DFC00773890 /* SignInView.swift in Sources */,
 				FEE1F43E2783616D00773890 /* TableViewCellRepresentable.swift in Sources */,
 				FEE1F3EC277F448C00773890 /* SignUpView.swift in Sources */,
+				FEE1F45F27856ABD00773890 /* EdtingPostViewController.swift in Sources */,
 				FEE1F3E8277E153800773890 /* ViewProtocol.swift in Sources */,
 				FEE1F3EE277F45B300773890 /* SignUpViewController.swift in Sources */,
 				FEE1F4362782E0B000773890 /* MainTableViewCell.swift in Sources */,
+				FEE1F463278570DF00773890 /* EdtingViewModel.swift in Sources */,
 				FEE1F3FA2780C0FA00773890 /* Observable.swift in Sources */,
 				FEE1F3EA277E17BF00773890 /* BaseViewController.swift in Sources */,
 				FEE1F45627843D7800773890 /* Comments.swift in Sources */,
 				FEE1F4322782D09E00773890 /* MainViewController.swift in Sources */,
+				FEE1F46127856ACA00773890 /* EdtingPostView.swift in Sources */,
 				FEE1F3F427809E3E00773890 /* Endpoint.swift in Sources */,
 				FEE1F3E3277E0F6300773890 /* MainButton.swift in Sources */,
 				FEE1F43A2783294600773890 /* MainViewModel.swift in Sources */,

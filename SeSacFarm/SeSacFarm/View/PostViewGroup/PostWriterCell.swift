@@ -45,6 +45,9 @@ class PostWriterCell: UITableViewCell, ViewProtocol {
 		commentImage.tintColor = .systemGray3
 	}
 	
+	
+	
+	
 	func setUpConstranits() {
 		[topView, designLine1, designLine2, designLine3, writerContent, commentImage, commentStatus].forEach {
 			contentView.addSubview($0)

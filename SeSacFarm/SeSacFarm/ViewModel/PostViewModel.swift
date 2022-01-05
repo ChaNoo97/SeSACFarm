@@ -31,7 +31,6 @@ class PostViewModel {
 	
 	func dateFormat(_ updateAt: String) -> String {
 		let dateFormatter = DateFormatter()
-		
 		let splitDate = String(updateAt.split(separator: "T")[0])
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		guard let convertDate = dateFormatter.date(from: splitDate) else {

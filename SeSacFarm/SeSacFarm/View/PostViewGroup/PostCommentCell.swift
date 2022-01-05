@@ -12,7 +12,7 @@ class PostCommentCell: UITableViewCell, ViewProtocol {
 	
 	let topView = UIView()
 	let commentUserName = UILabel()
-	let settingImage = UIImageView()
+	let settingButton = UIButton()
 	let comment = UILabel()
 	let bottomView = UIView()
 	
@@ -29,28 +29,22 @@ class PostCommentCell: UITableViewCell, ViewProtocol {
 	
 	func configure() {
 		
+		commentUserName.font = .boldSystemFont(ofSize: 18)
+		
 		comment.numberOfLines = 0
-		commentUserName.text = "메밀이"
-		comment.text = """
-			person.crop.circle.fill
-			person.crop.circle.fill
-			person.crop.circle.fill
-			person.crop.circle.fill
-			person.crop.circle.fill
-		"""
+		
 		[topView, bottomView].forEach {
 			$0.backgroundColor = .white
 			$0.layer.borderWidth = 1
 			$0.layer.borderColor = UIColor.white.cgColor
 		}
 		
-		settingImage.image = UIImage(systemName: "ellipsis")
-
+		settingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
 		
 	}
 	
 	func setUpConstranits() {
-		[topView, commentUserName, settingImage ,comment, bottomView].forEach {
+		[topView, commentUserName, settingButton ,comment, bottomView].forEach {
 			contentView.addSubview($0)
 		}
 		
@@ -65,8 +59,8 @@ class PostCommentCell: UITableViewCell, ViewProtocol {
 			$0.height.equalTo(20)
 		}
 		
-		settingImage.snp.makeConstraints {
-			$0.top.equalTo(commentUserName.snp.top)
+		settingButton.snp.makeConstraints {
+			$0.top.equalTo(commentUserName.snp.top).offset(5)
 			$0.trailing.equalTo(contentView.snp.trailing).inset(10)
 			$0.size.equalTo(20)
 		}

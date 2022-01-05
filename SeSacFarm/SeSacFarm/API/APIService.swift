@@ -43,14 +43,14 @@ class APIService {
 		URLSession.request(endpoint: request, completion: completion)
 	}
 	
-//	static func writePost(completion: @escaping (Posts?, APIError?) -> Void) {
-//		var request = URLRequest(url: Endpoint.posts.url)
-//		request.httpMethod = Methood.GET.rawValue
-//		//request.httpBody =
-//		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
-//			return
-//		}
-//		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
-//		URLSession.request(endpoint: request, completion: completion)
-//	}
+	static func writePost(text: String, completion: @escaping (Board?, APIError?) -> Void) {
+		var request = URLRequest(url: Endpoint.posts.url)
+		request.httpMethod = Methood.POST.rawValue
+		request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
+		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
+			return
+		}
+		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
+		URLSession.request(endpoint: request, completion: completion)
+	}
 }

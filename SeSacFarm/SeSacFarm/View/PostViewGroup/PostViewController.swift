@@ -11,7 +11,11 @@ import SnapKit
 class PostViewController: BaseViewController {
 	
 	let tableView = UITableView()
+	let bottomView = UIView()
+	let designLine = UIView()
+	let commentView = UIView()
 	let textView = UITextView()
+	let sendButton = UIButton()
 	let viewModel = PostViewModel()
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -24,6 +28,9 @@ class PostViewController: BaseViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		makeConstraints()
+		let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width , height: 100))
+		footerView.backgroundColor = .black
+		tableView.tableFooterView = footerView
 		tableView.register(PostWriterCell.self, forCellReuseIdentifier: PostWriterCell.reuseIdentifier)
 		tableView.register(PostCommentCell.self, forCellReuseIdentifier: PostCommentCell.reuseIdentifier)
 		tableView.rowHeight = UITableView.automaticDimension
@@ -31,14 +38,42 @@ class PostViewController: BaseViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 		tableView.separatorStyle = .none
+		
+		designLine.backgroundColor = .black
+		textView.backgroundColor = .lightGray
+		textView.layer.cornerRadius = 3
+		sendButton.backgroundColor = .red
 	}
 	
 	func makeConstraints() {
-		[tableView, textView].forEach {
+		[tableView, bottomView].forEach {
 			view.addSubview($0)
 		}
+		[commentView, designLine, textView].forEach {
+			bottomView.addSubview($0)
+		}
+		textView.addSubview(sendButton)
+	
 		tableView.snp.makeConstraints {
-			$0.edges.equalTo(view.safeAreaLayoutGuide)
+			$0.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+		}
+		bottomView.snp.makeConstraints {
+			$0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+			$0.bottom.equalTo(view.safeAreaLayoutGuide).inset(5)
+			$0.height.equalTo(50)
+		}
+		designLine.snp.makeConstraints {
+			$0.height.equalTo(1)
+			$0.leading.trailing.top.equalTo(bottomView)
+		}
+		textView.snp.makeConstraints {
+			$0.top.equalTo(designLine.snp.bottom).offset(4)
+			$0.leading.trailing.equalTo(bottomView).inset(10)
+			$0.bottom.equalTo(bottomView.snp.bottom).offset(4)
+		}
+		sendButton.snp.makeConstraints {
+			$0.top.bottom.trailing.equalTo(textView).inset(5)
+			$0.width.equalTo(sendButton.snp.height)
 		}
 	}
 	
@@ -76,8 +111,25 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 			let row = indexPath.row
 			cell2.commentUserName.text = viewModel.comments.value[row].user.username
 			cell2.comment.text = viewModel.comments.value[row].comment
+			cell2.settingButton.addTarget(self, action: #selector(settingButtonClicked), for: .touchUpInside)
 			return cell2
 		}
+	}
+	
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		if section == 1 {
+			return 50
+		} else {
+			return 0
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+		view.backgroundColor = .black
+	}
+	
+	@objc func settingButtonClicked() {
+		print(#function)
 	}
 	
 	

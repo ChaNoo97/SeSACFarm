@@ -34,7 +34,12 @@ class MainViewController: BaseViewController {
 		mainView.tableView.dataSource = self
 		mainView.tableView.rowHeight = UITableView.automaticDimension
 		mainView.tableView.estimatedRowHeight = UITableView.automaticDimension
-		
+		mainView.floatingButton.addTarget(self, action: #selector(floatingButtonclicked), for: .touchUpInside)
+	}
+	
+	@objc func floatingButtonclicked() {
+		let vc = EdtingPostViewController()
+		navigationController?.pushViewController(vc, animated: true)
 	}
 }
 

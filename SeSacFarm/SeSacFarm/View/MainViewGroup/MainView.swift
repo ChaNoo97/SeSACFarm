@@ -28,6 +28,9 @@ class MainView: UIView, ViewProtocol {
 	func configure() {
 		floatingButton.backgroundColor = .green
 		floatingButton.layer.cornerRadius = 30
+		floatingButton.setImage(UIImage(systemName: "plus"), for: .normal)
+		floatingButton.contentMode = .scaleAspectFill
+		floatingButton.tintColor = .white
 	}
 	
 	func setUpConstranits() {
