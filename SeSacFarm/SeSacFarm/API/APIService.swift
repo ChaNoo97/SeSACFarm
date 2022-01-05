@@ -34,7 +34,7 @@ class APIService {
 	}
 	
 	static func fetchCommetns(postId: Int, completion: @escaping (BoardComments?, APIError?) -> Void) {
-		var request = URLRequest(url: Endpoint.comments(id: postId).url)
+		var request = URLRequest(url: Endpoint.fetchComments(id: postId).url)
 		request.httpMethod = Methood.GET.rawValue
 		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
 			return
@@ -47,6 +47,17 @@ class APIService {
 		var request = URLRequest(url: Endpoint.posts.url)
 		request.httpMethod = Methood.POST.rawValue
 		request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
+		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
+			return
+		}
+		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
+		URLSession.request(endpoint: request, completion: completion)
+	}
+	
+	static func writeComment(text: String, postID: Int,completion: @escaping (BoardComment?, APIError?) -> Void) {
+		var request = URLRequest(url: Endpoint.writeComment.url)
+		request.httpMethod = Methood.POST.rawValue
+		request.httpBody = "comment=\(text)&post=\(postID)".data(using: .utf8, allowLossyConversion: false)
 		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
 			return
 		}

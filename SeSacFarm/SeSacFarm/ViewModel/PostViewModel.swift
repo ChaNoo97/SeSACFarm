@@ -14,6 +14,7 @@ class PostViewModel {
 	var content = ""
 	var date = ""
 	var comments = Observable(BoardComments())
+	var writeComments: Observable<String> = Observable("")
 	
 	func commentsGet(completion: @escaping() -> Void) {
 		guard let id = id else {
@@ -25,6 +26,15 @@ class PostViewModel {
 			}
 			self.comments.value = boardComments
 			
+			completion()
+		}
+	}
+	
+	func writeComment(completion: @escaping() -> Void) {
+		APIService.writeComment(text: writeComments.value, postID: self.id!) { comment, error in
+			guard let comment = comment else {
+				return
+			}
 			completion()
 		}
 	}

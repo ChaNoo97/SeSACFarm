@@ -17,6 +17,7 @@ class PostViewController: BaseViewController {
 	let textView = UITextView()
 	let sendButton = UIButton()
 	let viewModel = PostViewModel()
+	let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: 100))
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -28,8 +29,55 @@ class PostViewController: BaseViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		makeConstraints()
-		let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width , height: 100))
-		footerView.backgroundColor = .black
+		tableViewSetting()
+		configure()
+		textView.delegate = self
+		
+		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+		self.tableView.addGestureRecognizer(tap)
+		sendButton.isHidden = true
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		sendButton.addTarget(self, action: #selector(sendButtonClicked), for: .touchUpInside)
+	}
+	
+	@objc func sendButtonClicked() {
+		viewModel.writeComment {
+			self.viewModel.commentsGet {
+				self.tableView.reloadData()
+			}
+		}
+		textView.text = ""
+		viewModel.writeComments.value = ""
+		sendButton.isHidden = true
+	}
+	
+	@objc func dismissKeyboard() {
+		self.view.endEditing(true)
+	}
+	
+	@objc func keyboardShow(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+			if self.commentView.frame.origin.y == 0 {
+				self.commentView.frame.origin.y -= keyboardSize.height-40
+				self.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: keyboardSize.height+60)
+				tableView.tableFooterView = footerView
+			}
+		}
+	}
+	
+	@objc func keyboardHide(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+			if self.commentView.frame.origin.y != 0 {
+				self.commentView.frame.origin.y += keyboardSize.height-40
+				self.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)
+				tableView.tableFooterView = footerView
+			}
+		}
+	}
+	
+	func tableViewSetting() {
+//		let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width , height: 100))
 		tableView.tableFooterView = footerView
 		tableView.register(PostWriterCell.self, forCellReuseIdentifier: PostWriterCell.reuseIdentifier)
 		tableView.register(PostCommentCell.self, forCellReuseIdentifier: PostCommentCell.reuseIdentifier)
@@ -38,46 +86,61 @@ class PostViewController: BaseViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 		tableView.separatorStyle = .none
-		
+	}
+	
+	override func configure() {
+		super.configure()
 		designLine.backgroundColor = .black
-		textView.backgroundColor = .lightGray
+		sendButton.setImage(UIImage(systemName: "paperplane.circle.fill"), for: .normal)
+		sendButton.tintColor = .systemGray3
 		textView.layer.cornerRadius = 3
-		sendButton.backgroundColor = .red
+		textView.font = .systemFont(ofSize: 18)
+		
+		bottomView.backgroundColor = .white
+		textView.backgroundColor = .systemGray3
+		
 	}
 	
 	func makeConstraints() {
 		[tableView, bottomView].forEach {
 			view.addSubview($0)
 		}
-		[commentView, designLine, textView].forEach {
-			bottomView.addSubview($0)
+		bottomView.addSubview(commentView)
+		
+		[textView, sendButton, designLine].forEach {
+			commentView.addSubview($0)
 		}
-		textView.addSubview(sendButton)
 	
 		tableView.snp.makeConstraints {
 			$0.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
 		}
 		bottomView.snp.makeConstraints {
 			$0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-			$0.bottom.equalTo(view.safeAreaLayoutGuide).inset(5)
-			$0.height.equalTo(50)
+			$0.bottom.equalTo(view)
+			$0.height.equalTo(89)
 		}
 		designLine.snp.makeConstraints {
 			$0.height.equalTo(1)
-			$0.leading.trailing.top.equalTo(bottomView)
+			$0.leading.trailing.top.equalTo(commentView)
+		}
+		commentView.snp.makeConstraints {
+			$0.top.equalTo(bottomView.snp.top)
+			$0.leading.trailing.equalTo(bottomView)
+			$0.bottom.equalTo(view.snp.bottom).inset(40)
 		}
 		textView.snp.makeConstraints {
-			$0.top.equalTo(designLine.snp.bottom).offset(4)
-			$0.leading.trailing.equalTo(bottomView).inset(10)
-			$0.bottom.equalTo(bottomView.snp.bottom).offset(4)
+			$0.top.equalTo(commentView.snp.top).inset(5)
+			$0.leading.equalTo(commentView).inset(15)
+			$0.bottom.equalTo(commentView).inset(5)
+			$0.trailing.equalTo(sendButton.snp.leading)
 		}
 		sendButton.snp.makeConstraints {
-			$0.top.bottom.trailing.equalTo(textView).inset(5)
-			$0.width.equalTo(sendButton.snp.height)
+			$0.trailing.equalTo(commentView.snp.trailing).inset(15)
+			$0.bottom.equalTo(commentView).inset(5)
+			$0.width.equalTo(44)
+			$0.height.equalTo(39)
 		}
 	}
-	
-	
 }
 
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {
@@ -116,21 +179,25 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 	}
 	
-	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		if section == 1 {
-			return 50
-		} else {
-			return 0
-		}
-	}
-	
-	func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-		view.backgroundColor = .black
-	}
-	
 	@objc func settingButtonClicked() {
 		print(#function)
 	}
 	
+}
+
+extension PostViewController: UITextViewDelegate {
+	func textViewDidChange(_ textView: UITextView) {
+		print(#function)
+		if textView.text == "" {
+			self.sendButton.isHidden = true
+		} else {
+			self.sendButton.isHidden = false
+			self.sendButton.tintColor = .green
+		}
+		viewModel.writeComments.value = textView.text ?? ""
+	}
 	
+	func textViewDidEndEditing(_ textView: UITextView) {
+		print(#function)
+	}
 }
