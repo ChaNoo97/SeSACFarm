@@ -24,7 +24,7 @@ class APIService {
 	}
 	
 	static func fetchPosts(completion: @escaping (Boards?, APIError?) -> Void) {
-		var request = URLRequest(url: Endpoint.posts.url)
+		var request = URLRequest(url: Endpoint.featchPosts.url)
 		request.httpMethod = Methood.GET.rawValue
 		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
 			return
@@ -84,6 +84,30 @@ class APIService {
 		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else { return }
 		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
 		request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+		URLSession.request(endpoint: request, completion: completion)
+	}
+	
+	static func deleteComment(commentId: Int,completion: @escaping (BoardComment?, APIError?) -> Void) {
+		var request = URLRequest(url: Endpoint.deleteComment(id: commentId).url)
+		request.httpMethod = Methood.DELETE.rawValue
+		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else { return }
+		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
+		URLSession.request(endpoint: request, completion: completion)
+	}
+	
+	static func deletePost(postId:Int, completion: @escaping (Board?, APIError?) -> Void) {
+		var request = URLRequest(url: Endpoint.deletePost(id: postId).url)
+		request.httpMethod = Methood.DELETE.rawValue
+		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else { return }
+		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
+		URLSession.request(endpoint: request, completion: completion)
+	}
+	
+	static func fetchPost(postId: Int, completion: @escaping (Board?, APIError?) -> Void) {
+		var request = URLRequest(url: Endpoint.deletePost(id: postId).url)
+		request.httpMethod = Methood.GET.rawValue
+		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else { return }
+		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
 		URLSession.request(endpoint: request, completion: completion)
 	}
 }

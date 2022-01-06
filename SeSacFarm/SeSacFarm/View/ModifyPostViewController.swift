@@ -59,6 +59,5 @@ class ModifyPostViewController: BaseViewController {
 extension ModifyPostViewController: UITextViewDelegate {
 	func textViewDidChange(_ textView: UITextView) {
 		viewModel.modifyPost = mainView.textView.text
-		print(viewModel.modifyPost)
 	}
 }

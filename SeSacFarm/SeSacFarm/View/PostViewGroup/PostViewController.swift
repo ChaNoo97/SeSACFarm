@@ -21,7 +21,7 @@ class PostViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		print(#function)
+		
 		viewModel.commentsGet {
 			self.tableView.reloadData()
 		}
@@ -62,7 +62,15 @@ class PostViewController: BaseViewController {
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
 		let delete = UIAlertAction(title: "삭제", style: .destructive) { action in
-			
+			guard let id = self.viewModel.id else { return }
+			self.viewModel.deletePost(postId: id) {
+				let alert = UIAlertController(title: "삭제", message: "삭제되었습니다.", preferredStyle: .alert)
+				let confirm = UIAlertAction(title: "allow", style: .default) { action in
+					self.navigationController?.popViewController(animated: true)
+				}
+				alert.addAction(confirm)
+				self.present(alert, animated: true, completion: nil)
+			}
 		}
 		alert.addAction(modify)
 		alert.addAction(delete)
@@ -193,6 +201,11 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
  			cell1.writerName.text = viewModel.name
 			if viewModel.comments.value.count == 0 {
 				cell1.writerContent.text = viewModel.content
+				viewModel.featchPost {
+					self.viewModel.post.bind { value in
+						cell1.writerContent.text = value
+					}
+				}
 			} else {
 				cell1.writerContent.text = viewModel.comments.value[0].post.text
 			}
@@ -219,7 +232,19 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
 		let favoriteStandard = UIAlertAction(title: "삭제", style: .destructive) { action in
-			
+		let id = self.viewModel.comments.value[sender.tag].id
+			self.viewModel.deleteComment(commentId: id) {
+			let alert = UIAlertController(title: "", message: "삭제되었습니다.", preferredStyle: .alert)
+				
+				let confirm = UIAlertAction(title: "확인", style: .default) { action in
+					self.viewModel.commentsGet {
+						self.tableView.reloadData()
+					}
+				}
+				alert.addAction(confirm)
+				
+				self.present(alert, animated: true, completion: nil)
+			}
 		}
 		alert.addAction(checkStandard)
 		alert.addAction(favoriteStandard)
@@ -245,4 +270,5 @@ extension PostViewController: UITextViewDelegate {
 	func textViewDidEndEditing(_ textView: UITextView) {
 		print(#function)
 	}
+	
 }

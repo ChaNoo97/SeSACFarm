@@ -25,10 +25,13 @@ enum Endpoint {
 	case signUp
 	case logIn
 	case posts
+	case featchPosts
 	case fetchComments(id: Int)
 	case writeComment
 	case modifyComment(id: Int)
 	case modifyPost(id: Int)
+	case deleteComment(id: Int)
+	case deletePost(id: Int)
 }
 
 extension Endpoint {
@@ -40,6 +43,8 @@ extension Endpoint {
 			return .makeEndPoint("/auth/local")
 		case .posts:
 			return .makeEndPoint("/posts")
+		case .featchPosts:
+			return .makeEndPoint("/posts?_sort=created_at:desc")
 		case .fetchComments(id: let id):
 			return .makeEndPoint("/comments?post=\(id)")
 		case .writeComment:
@@ -48,7 +53,12 @@ extension Endpoint {
 			return .makeEndPoint("/comments/\(id)")
 		case .modifyPost(id: let id):
 			return .makeEndPoint("/posts/\(id)")
+		case .deleteComment(id: let id):
+			return .makeEndPoint("/comments/\(id)")
+		case .deletePost(id: let id):
+			return .makeEndPoint("/posts/\(id)")
 		}
+		
 	}
 }
 

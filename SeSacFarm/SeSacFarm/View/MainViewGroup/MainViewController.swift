@@ -20,6 +20,7 @@ class MainViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		print(#function)
 		mainViewModel.postsGet {
 			self.mainView.tableView.reloadData()
 		}

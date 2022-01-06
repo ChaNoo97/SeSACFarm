@@ -15,6 +15,7 @@ class PostViewModel {
 	var date = ""
 	var comments = Observable(BoardComments())
 	var writeComments: Observable<String> = Observable("")
+	var post = Observable("")
 	
 	func commentsGet(completion: @escaping() -> Void) {
 		guard let id = id else {
@@ -53,6 +54,37 @@ class PostViewModel {
 		dateFormatter.dateFormat = "MM/dd"
 		let convertStr = dateFormatter.string(from: convertDate)
 		return convertStr
+	}
+	
+	func deleteComment(commentId: Int, completion: @escaping () -> Void) {
+		APIService.deleteComment(commentId: commentId) { comment, error in
+			guard let comment = comment else {
+				return
+			}
+			completion()
+		}
+	}
+	
+	func deletePost(postId: Int, completion: @escaping () -> Void) {
+		APIService.deletePost(postId: postId) { board, error in
+			guard let board = board else {
+				return
+			}
+			completion()
+		}
+	}
+	
+	func featchPost(completion: @escaping () -> Void) {
+		guard let id = id else {
+			return
+		}
+		APIService.fetchPost(postId: id) { board, error in
+			guard let board = board else {
+				return
+			}
+			self.post.value = board.text
+			completion()
+		}
 	}
 	
 }
