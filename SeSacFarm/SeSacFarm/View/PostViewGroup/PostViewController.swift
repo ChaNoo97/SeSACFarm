@@ -21,6 +21,7 @@ class PostViewController: BaseViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		print(#function)
 		viewModel.commentsGet {
 			self.tableView.reloadData()
 		}
@@ -31,7 +32,10 @@ class PostViewController: BaseViewController {
 		makeConstraints()
 		tableViewSetting()
 		configure()
+		
 		textView.delegate = self
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(modifyPostClicked))
 		
 		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
 		self.tableView.addGestureRecognizer(tap)
@@ -39,6 +43,30 @@ class PostViewController: BaseViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 		sendButton.addTarget(self, action: #selector(sendButtonClicked), for: .touchUpInside)
+	}
+	
+	@objc func modifyPostClicked() {
+		let alert = UIAlertController(title: "게시글 수정/삭제", message: "선택해주세요", preferredStyle: .actionSheet)
+		
+		let modify = UIAlertAction(title: "수정", style: .default) { action in
+			let vc = ModifyPostViewController()
+			vc.viewModel.postId = self.viewModel.id
+			if self.viewModel.comments.value.count == 0 {
+				print(self.viewModel.content)
+				vc.previousPost = self.viewModel.content
+			} else {
+				print(self.viewModel.comments.value[0].post.text)
+				vc.previousPost = self.viewModel.comments.value[0].post.text
+			}
+			
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
+		let delete = UIAlertAction(title: "삭제", style: .destructive) { action in
+			
+		}
+		alert.addAction(modify)
+		alert.addAction(delete)
+		present(alert, animated: true, completion: nil)
 	}
 	
 	@objc func sendButtonClicked() {
@@ -77,7 +105,6 @@ class PostViewController: BaseViewController {
 	}
 	
 	func tableViewSetting() {
-//		let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width , height: 100))
 		tableView.tableFooterView = footerView
 		tableView.register(PostWriterCell.self, forCellReuseIdentifier: PostWriterCell.reuseIdentifier)
 		tableView.register(PostCommentCell.self, forCellReuseIdentifier: PostCommentCell.reuseIdentifier)
@@ -161,6 +188,7 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell1 = tableView.dequeueReusableCell(withIdentifier: PostWriterCell.reuseIdentifier) as! PostWriterCell
 		let cell2 = tableView.dequeueReusableCell(withIdentifier: PostCommentCell.reuseIdentifier) as! PostCommentCell
+		
 		if indexPath.section == 0 {
  			cell1.writerName.text = viewModel.name
 			if viewModel.comments.value.count == 0 {

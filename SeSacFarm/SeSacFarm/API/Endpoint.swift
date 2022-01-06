@@ -28,6 +28,7 @@ enum Endpoint {
 	case fetchComments(id: Int)
 	case writeComment
 	case modifyComment(id: Int)
+	case modifyPost(id: Int)
 }
 
 extension Endpoint {
@@ -45,6 +46,8 @@ extension Endpoint {
 			return .makeEndPoint("/comments")
 		case .modifyComment(id: let id):
 			return .makeEndPoint("/comments/\(id)")
+		case .modifyPost(id: let id):
+			return .makeEndPoint("/posts/\(id)")
 		}
 	}
 }

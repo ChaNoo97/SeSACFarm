@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FE310C672786AACE0064FD2B /* CommentModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C662786AACE0064FD2B /* CommentModifyViewController.swift */; };
 		FE310C692786BF6F0064FD2B /* CommentModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C682786BF6F0064FD2B /* CommentModifyViewModel.swift */; };
+		FE310C6B2786D7E40064FD2B /* ModifyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C6A2786D7E40064FD2B /* ModifyPostViewController.swift */; };
+		FE310C6D2786D8B40064FD2B /* ModifyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C6C2786D8B40064FD2B /* ModifyPostViewModel.swift */; };
 		FEE1F3C3277E0AAF00773890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3C2277E0AAF00773890 /* AppDelegate.swift */; };
 		FEE1F3C5277E0AAF00773890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3C4277E0AAF00773890 /* SceneDelegate.swift */; };
 		FEE1F3CC277E0AB100773890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE1F3CB277E0AB100773890 /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		FE310C662786AACE0064FD2B /* CommentModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModifyViewController.swift; sourceTree = "<group>"; };
 		FE310C682786BF6F0064FD2B /* CommentModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModifyViewModel.swift; sourceTree = "<group>"; };
+		FE310C6A2786D7E40064FD2B /* ModifyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPostViewController.swift; sourceTree = "<group>"; };
+		FE310C6C2786D8B40064FD2B /* ModifyPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPostViewModel.swift; sourceTree = "<group>"; };
 		FEE1F3BF277E0AAF00773890 /* SeSacFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSacFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1F3C2277E0AAF00773890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE1F3C4277E0AAF00773890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 		FEE1F3DB277E0EC700773890 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FE310C662786AACE0064FD2B /* CommentModifyViewController.swift */,
+				FE310C6A2786D7E40064FD2B /* ModifyPostViewController.swift */,
 				FEE1F45D27856AA400773890 /* EdtingPostViewGroup */,
 				FEE1F4462784142C00773890 /* InitialViewGroup */,
 				FEE1F4472784144A00773890 /* SignUpViewGroup */,
@@ -156,6 +162,7 @@
 				FEE1F4532784376700773890 /* PostViewModel.swift */,
 				FEE1F462278570DF00773890 /* EdtingViewModel.swift */,
 				FE310C682786BF6F0064FD2B /* CommentModifyViewModel.swift */,
+				FE310C6C2786D8B40064FD2B /* ModifyPostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -241,7 +248,6 @@
 				FEE1F44B2784156E00773890 /* PostViewController.swift */,
 				FEE1F44F2784189400773890 /* PostWriterCell.swift */,
 				FEE1F451278418B200773890 /* PostCommentCell.swift */,
-				FE310C662786AACE0064FD2B /* CommentModifyViewController.swift */,
 			);
 			path = PostViewGroup;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEE1F452278418B200773890 /* PostCommentCell.swift in Sources */,
+				FE310C6B2786D7E40064FD2B /* ModifyPostViewController.swift in Sources */,
 				FE310C672786AACE0064FD2B /* CommentModifyViewController.swift in Sources */,
 				FEE1F4502784189400773890 /* PostWriterCell.swift in Sources */,
 				FEE1F3F227804E0900773890 /* SignInViewController.swift in Sources */,
@@ -360,6 +367,7 @@
 				FEE1F3FA2780C0FA00773890 /* Observable.swift in Sources */,
 				FEE1F3EA277E17BF00773890 /* BaseViewController.swift in Sources */,
 				FEE1F45627843D7800773890 /* Comments.swift in Sources */,
+				FE310C6D2786D8B40064FD2B /* ModifyPostViewModel.swift in Sources */,
 				FEE1F4322782D09E00773890 /* MainViewController.swift in Sources */,
 				FEE1F46127856ACA00773890 /* EdtingView.swift in Sources */,
 				FEE1F3F427809E3E00773890 /* Endpoint.swift in Sources */,
