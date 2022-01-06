@@ -31,6 +31,10 @@ class PostViewModel {
 	}
 	
 	func writeComment(completion: @escaping() -> Void) {
+		var comment = ""
+		writeComments.bind { value in
+			comment = value
+		}
 		APIService.writeComment(text: writeComments.value, postID: self.id!) { comment, error in
 			guard let comment = comment else {
 				return

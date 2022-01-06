@@ -64,4 +64,16 @@ class APIService {
 		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
 		URLSession.request(endpoint: request, completion: completion)
 	}
+	
+	static func modifyComment(commentId: Int, modifyComment: String, postId: Int, completion: @escaping (BoardComment?, APIError?) -> Void) {
+		var request = URLRequest(url: Endpoint.modifyComment(id: commentId).url)
+		request.httpMethod = Methood.PUT.rawValue
+		request.httpBody = "comment=\(modifyComment)&post=\(postId)".data(using: .utf8, allowLossyConversion: false)
+		guard let jwt = UserDefaults.standard.string(forKey: "jwt") else {
+			return
+		}
+		request.setValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
+		request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+		URLSession.request(endpoint: request, completion: completion)
+	}
 }

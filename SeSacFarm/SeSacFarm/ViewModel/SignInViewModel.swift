@@ -21,6 +21,7 @@ class SignInViewModel {
 			UserDefaults.standard.set(userData.jwt, forKey: "jwt")
 			UserDefaults.standard.set(userData.user.username, forKey: "loginUserName")
 			UserDefaults.standard.set(userData.user.email, forKey: "loginUserEmail")
+			UserDefaults.standard.set(userData.user.id, forKey: "UserId")
 			completion()
 		}
 	}

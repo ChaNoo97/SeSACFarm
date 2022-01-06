@@ -10,7 +10,7 @@ import SnapKit
 
 class EdtingPostViewController: BaseViewController {
 	
-	let mainView = EdtingPostView()
+	let mainView = EdtingView()
 	let viewModel = EdtingViewModel()
 	
 	override func loadView() {

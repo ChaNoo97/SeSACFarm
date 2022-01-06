@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class EdtingPostView: UIView, ViewProtocol {
+class EdtingView: UIView, ViewProtocol {
 	
 	let textView = UITextView()
 	

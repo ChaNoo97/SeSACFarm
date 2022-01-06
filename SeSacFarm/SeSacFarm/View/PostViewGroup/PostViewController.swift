@@ -143,6 +143,7 @@ class PostViewController: BaseViewController {
 	}
 }
 
+//MARK: TableViewDelegate
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -161,7 +162,7 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell1 = tableView.dequeueReusableCell(withIdentifier: PostWriterCell.reuseIdentifier) as! PostWriterCell
 		let cell2 = tableView.dequeueReusableCell(withIdentifier: PostCommentCell.reuseIdentifier) as! PostCommentCell
 		if indexPath.section == 0 {
-			cell1.writerName.text = viewModel.name
+ 			cell1.writerName.text = viewModel.name
 			if viewModel.comments.value.count == 0 {
 				cell1.writerContent.text = viewModel.content
 			} else {
@@ -171,20 +172,36 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 			cell1.commentStatus.text = "댓글 \(viewModel.comments.value.count)"
 			return cell1
 		} else {
-			let row = indexPath.row
-			cell2.commentUserName.text = viewModel.comments.value[row].user.username
-			cell2.comment.text = viewModel.comments.value[row].comment
-			cell2.settingButton.addTarget(self, action: #selector(settingButtonClicked), for: .touchUpInside)
+			let row = viewModel.comments.value[indexPath.row]
+			cell2.commentUserName.text = row.user.username
+			cell2.comment.text = row.comment
+			cell2.settingButton.addTarget(self, action: #selector(settingButtonClicked(_:)), for: .touchUpInside)
+			cell2.settingButton.tag = indexPath.row
 			return cell2
 		}
 	}
 	
-	@objc func settingButtonClicked() {
-		print(#function)
+	@objc func settingButtonClicked(_ sender: UIButton) {
+		let alert = UIAlertController(title: "댓글수정", message: "선택해주세요", preferredStyle: .actionSheet)
+		
+		let checkStandard = UIAlertAction(title: "수정", style: .default) { action in
+			let vc = CommentModifyViewController()
+			vc.viewModel.commentId = self.viewModel.comments.value[sender.tag].id
+			vc.viewModel.postId = self.viewModel.id
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
+		let favoriteStandard = UIAlertAction(title: "삭제", style: .destructive) { action in
+			
+		}
+		alert.addAction(checkStandard)
+		alert.addAction(favoriteStandard)
+
+		present(alert, animated: true, completion: nil)
 	}
 	
 }
 
+//MARK: TextViewDelegate
 extension PostViewController: UITextViewDelegate {
 	func textViewDidChange(_ textView: UITextView) {
 		print(#function)
