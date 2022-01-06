@@ -11,6 +11,7 @@
 		FE310C692786BF6F0064FD2B /* CommentModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C682786BF6F0064FD2B /* CommentModifyViewModel.swift */; };
 		FE310C6B2786D7E40064FD2B /* ModifyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C6A2786D7E40064FD2B /* ModifyPostViewController.swift */; };
 		FE310C6D2786D8B40064FD2B /* ModifyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C6C2786D8B40064FD2B /* ModifyPostViewModel.swift */; };
+		FE310C70278745B10064FD2B /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = FE310C6F278745B10064FD2B /* Toast */; };
 		FEE1F3C3277E0AAF00773890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3C2277E0AAF00773890 /* AppDelegate.swift */; };
 		FEE1F3C5277E0AAF00773890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3C4277E0AAF00773890 /* SceneDelegate.swift */; };
 		FEE1F3CC277E0AB100773890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE1F3CB277E0AB100773890 /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE310C70278745B10064FD2B /* Toast in Frameworks */,
 				FEE1F3DA277E0C9500773890 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +281,7 @@
 			name = SeSacFarm;
 			packageProductDependencies = (
 				FEE1F3D9277E0C9500773890 /* SnapKit */,
+				FE310C6F278745B10064FD2B /* Toast */,
 			);
 			productName = SeSacFarm;
 			productReference = FEE1F3BF277E0AAF00773890 /* SeSacFarm.app */;
@@ -310,6 +313,7 @@
 			mainGroup = FEE1F3B6277E0AAF00773890;
 			packageReferences = (
 				FEE1F3D8277E0C9500773890 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FE310C6E278745B10064FD2B /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = FEE1F3C0277E0AAF00773890 /* Products */;
 			projectDirPath = "";
@@ -584,6 +588,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FE310C6E278745B10064FD2B /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		FEE1F3D8277E0C9500773890 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -595,6 +607,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FE310C6F278745B10064FD2B /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE310C6E278745B10064FD2B /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		FEE1F3D9277E0C9500773890 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FEE1F3D8277E0C9500773890 /* XCRemoteSwiftPackageReference "SnapKit" */;

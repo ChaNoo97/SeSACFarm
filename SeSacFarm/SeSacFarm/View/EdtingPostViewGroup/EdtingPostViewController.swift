@@ -29,18 +29,21 @@ class EdtingPostViewController: BaseViewController {
 	}
 	
 	@objc func saveButtonClicked() {
+		mainView.textView.endEditing(true)
+		if mainView.textView.text == "" {
+			self.view.makeToast("텍스트가 없습니다.")
+		} else {
 		viewModel.userText.value = self.mainView.textView.text
 		viewModel.userTextPost {
-			let alert = UIAlertController(title: "완료", message: "작성되었습니다.", preferredStyle: .alert)
+				let alert = UIAlertController(title: "완료", message: "작성되었습니다.", preferredStyle: .alert)
 			
-			let destructive = UIAlertAction(title: "allow", style: .default) { action in
+				let destructive = UIAlertAction(title: "확인", style: .default) { action in
 				self.navigationController?.popViewController(animated: true)
 			}
-			alert.addAction(destructive)
-			self.present(alert, animated: true, completion: nil)
-
+				alert.addAction(destructive)
+				self.present(alert, animated: true, completion: nil)
+			}
 		}
 	}
-	
 }
  

@@ -65,15 +65,17 @@ class PostViewController: BaseViewController {
 			guard let id = self.viewModel.id else { return }
 			self.viewModel.deletePost(postId: id) {
 				let alert = UIAlertController(title: "삭제", message: "삭제되었습니다.", preferredStyle: .alert)
-				let confirm = UIAlertAction(title: "allow", style: .default) { action in
+				let confirm = UIAlertAction(title: "확인", style: .default) { action in
 					self.navigationController?.popViewController(animated: true)
 				}
 				alert.addAction(confirm)
 				self.present(alert, animated: true, completion: nil)
 			}
 		}
+		let cancle = UIAlertAction(title: "취소", style: .cancel)
 		alert.addAction(modify)
 		alert.addAction(delete)
+		alert.addAction(cancle)
 		present(alert, animated: true, completion: nil)
 	}
 	

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Toast
 
 class SignInViewController: BaseViewController {
 	
@@ -51,11 +52,15 @@ class SignInViewController: BaseViewController {
 	}
 	
 	@objc func logInButtonClicked() {
-		viewModel.postUserLogin {
-			guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-			windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
-			windowScene.windows.first?.makeKeyAndVisible()
+		self.view.endEditing(true)
+		viewModel.postUserLogin { value in
+			if value {
+				guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+				windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+				windowScene.windows.first?.makeKeyAndVisible()
+			} else {
+				self.view.makeToast("아이디/비밀번호를 확인해 주세요.")
+			}
 		}
 	}
-	
 }

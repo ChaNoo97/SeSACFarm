@@ -14,6 +14,21 @@ enum APIError: Error {
 	case invalidData
 }
 
+//extension APIError {
+//	var code: Bool {
+//		switch self {
+//		case .failed:
+//			return false
+//		case .invalidResponse:
+//			return false
+//		case .noData:
+//			return false
+//		case .invalidData:
+//			return false
+//		}
+//	}
+//}
+
 enum Methood: String {
 	case GET
 	case POST

@@ -41,19 +41,17 @@ class ModifyPostViewController: BaseViewController {
 			}
 			alert.addAction(destructive)
 			present(alert, animated: true, completion: nil)
-		}
-		
-		viewModel.modifyPost {
-			let alert = UIAlertController(title: "수정", message: "수정되었습니다.", preferredStyle: .alert)
-			let confirm = UIAlertAction(title: "확인", style: .default) { action in
-				self.navigationController?.popViewController(animated: true)
+		} else {
+			viewModel.modifyPost {
+				let alert = UIAlertController(title: "수정", message: "수정되었습니다.", preferredStyle: .alert)
+				let confirm = UIAlertAction(title: "확인", style: .default) { action in
+					self.navigationController?.popViewController(animated: true)
+				}
+				alert.addAction(confirm)
+				self.present(alert, animated: true, completion: nil)
 			}
-			alert.addAction(confirm)
-			self.present(alert, animated: true, completion: nil)
-
 		}
 	}
-	
 }
 
 extension ModifyPostViewController: UITextViewDelegate {
