@@ -78,7 +78,6 @@ extension Endpoint {
 }
 
 extension URL {
-	static let baseURL = "http://test.monocoding.com:1231"
 	
 	static func makeEndPoint(_ endpoint: String) -> URL {
 		URL(string: baseURL + endpoint)!
@@ -99,9 +98,6 @@ extension URLSession {
 	static func request<T: Decodable> (_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
 		session.dataTask(endpoint) { data, response, error in
 			DispatchQueue.main.async {
-				print("Data", data)
-				print("response", response)
-				print("error",error)
 				guard error == nil else {
 					completion(nil, .failed)
 					return
