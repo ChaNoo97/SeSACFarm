@@ -8,5 +8,7 @@
 import Foundation
 
 extension URL {
+	static let  test = "test"
+	static let test2 = "test2"
 	static let baseURL = "http://test.monocoding.com:1231"
 }
