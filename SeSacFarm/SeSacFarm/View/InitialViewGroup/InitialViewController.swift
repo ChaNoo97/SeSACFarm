@@ -34,10 +34,6 @@ class InitialViewController: BaseViewController {
 		
 	}
 	
-	override func configure() {
-		super.configure()
-	}
-	
 	@objc func buttonClicked() {
 		let vc = SignUpViewController()
 		navigationController?.pushViewController(vc, animated: true)

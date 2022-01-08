@@ -47,10 +47,6 @@ class SignUpViewController: BaseViewController {
 		}
 	}
 	
-	override func configure() {
-		super.configure()
-	}
-	
 	@objc func signUpButtonClicked() {
 		print(#function)
 		print(viewModel.email.value)

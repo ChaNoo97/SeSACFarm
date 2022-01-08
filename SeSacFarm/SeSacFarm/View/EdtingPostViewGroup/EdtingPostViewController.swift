@@ -37,10 +37,10 @@ class EdtingPostViewController: BaseViewController {
 		viewModel.userTextPost {
 				let alert = UIAlertController(title: "완료", message: "작성되었습니다.", preferredStyle: .alert)
 			
-				let destructive = UIAlertAction(title: "확인", style: .default) { action in
+				let allow = UIAlertAction(title: "확인", style: .default) { action in
 				self.navigationController?.popViewController(animated: true)
 			}
-				alert.addAction(destructive)
+				alert.addAction(allow)
 				self.present(alert, animated: true, completion: nil)
 			}
 		}
