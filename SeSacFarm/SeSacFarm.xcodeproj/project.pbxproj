@@ -12,6 +12,7 @@
 		FE310C6B2786D7E40064FD2B /* ModifyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C6A2786D7E40064FD2B /* ModifyPostViewController.swift */; };
 		FE310C6D2786D8B40064FD2B /* ModifyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C6C2786D8B40064FD2B /* ModifyPostViewModel.swift */; };
 		FE310C70278745B10064FD2B /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = FE310C6F278745B10064FD2B /* Toast */; };
+		FE310C7827894F960064FD2B /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE310C7727894F960064FD2B /* BaseURL.swift */; };
 		FEE1F3C3277E0AAF00773890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3C2277E0AAF00773890 /* AppDelegate.swift */; };
 		FEE1F3C5277E0AAF00773890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE1F3C4277E0AAF00773890 /* SceneDelegate.swift */; };
 		FEE1F3CC277E0AB100773890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE1F3CB277E0AB100773890 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		FE310C682786BF6F0064FD2B /* CommentModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModifyViewModel.swift; sourceTree = "<group>"; };
 		FE310C6A2786D7E40064FD2B /* ModifyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPostViewController.swift; sourceTree = "<group>"; };
 		FE310C6C2786D8B40064FD2B /* ModifyPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPostViewModel.swift; sourceTree = "<group>"; };
+		FE310C7727894F960064FD2B /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
 		FEE1F3BF277E0AAF00773890 /* SeSacFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSacFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1F3C2277E0AAF00773890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEE1F3C4277E0AAF00773890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			children = (
 				FEE1F3F327809E3E00773890 /* Endpoint.swift */,
 				FEE1F3FB2780C44B00773890 /* APIService.swift */,
+				FE310C7727894F960064FD2B /* BaseURL.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				FEE1F3D7277E0C6A00773890 /* InitialViewController.swift in Sources */,
 				FEE1F44C2784156E00773890 /* PostViewController.swift in Sources */,
 				FEE1F3E0277E0F0000773890 /* InitialView.swift in Sources */,
+				FE310C7827894F960064FD2B /* BaseURL.swift in Sources */,
 				FEE1F4542784376700773890 /* PostViewModel.swift in Sources */,
 				FEE1F43C2783341600773890 /* Boards.swift in Sources */,
 				FEE1F4342782DEAA00773890 /* MainView.swift in Sources */,
