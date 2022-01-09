@@ -10,8 +10,8 @@ import Foundation
 class PostViewModel {
 	
 	var id: Int?
+	var userId: Int?
 	var name = ""
-	var content = ""
 	var date = ""
 	var comments = Observable(BoardComments())
 	var writeComments: Observable<String> = Observable("")
@@ -82,6 +82,7 @@ class PostViewModel {
 			guard let board = board else {
 				return
 			}
+			self.userId = board.user.id
 			self.post.value = board.text
 			completion()
 		}

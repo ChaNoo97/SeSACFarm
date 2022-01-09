@@ -73,7 +73,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		let row = indexPath.row
 		let vc = PostViewController()
 		vc.viewModel.id = mainViewModel.posts.value[row].id
-		vc.viewModel.content = mainViewModel.posts.value[row].text
+//		vc.viewModel.content = mainViewModel.posts.value[row].text
 		vc.viewModel.date = mainViewModel.posts.value[row].updatedAt
 		vc.viewModel.name = mainViewModel.posts.value[row].user.username
 		navigationController?.pushViewController(vc, animated: true)

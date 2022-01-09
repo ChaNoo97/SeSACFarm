@@ -21,6 +21,14 @@ class PostViewController: BaseViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		viewModel.commentsGet {
+			self.viewModel.featchPost { [self] in
+				if viewModel.userId == Int(UserDefaults.standard.string(forKey: "UserId")!) {
+					navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(modifyPostClicked))
+						}
+				self.mainView.tableView.reloadData()
+			}
+		}
+		viewModel.commentsGet {
 			self.mainView.tableView.reloadData()
 		}
 	}
@@ -31,8 +39,6 @@ class PostViewController: BaseViewController {
 		mainView.textView.delegate = self
 		mainView.tableView.delegate = self
 		mainView.tableView.dataSource = self
-		
-		navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(modifyPostClicked))
 		
 		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
 		mainView.tableView.addGestureRecognizer(tap)
@@ -50,8 +56,9 @@ class PostViewController: BaseViewController {
 			let vc = ModifyPostViewController()
 			vc.viewModel.postId = self.viewModel.id
 			if self.viewModel.comments.value.count == 0 {
-				print(self.viewModel.content)
-				vc.previousPost = self.viewModel.content
+				self.viewModel.post.bind { value in
+					vc.previousPost = value
+				}
 			} else {
 				print(self.viewModel.comments.value[0].post.text)
 				vc.previousPost = self.viewModel.comments.value[0].post.text
@@ -135,17 +142,9 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 		if indexPath.section == 0 {
  			cell1.writerName.text = viewModel.name
 			
-			if viewModel.comments.value.count == 0 {
-				cell1.writerContent.text = viewModel.content
-				viewModel.featchPost {
-					self.viewModel.post.bind { value in
-						cell1.writerContent.text = value
-					}
-				}
-			} else {
-				cell1.writerContent.text = viewModel.comments.value[0].post.text
+			viewModel.post.bind { value in
+				cell1.writerContent.text = value
 			}
-			
 			cell1.writeDate.text = viewModel.dateFormat(viewModel.date)
 			cell1.commentStatus.text = "댓글 \(viewModel.comments.value.count)"
 			return cell1
