@@ -82,6 +82,7 @@ class PostWriterCell: UITableViewCell, ViewProtocol {
 		}
 		writerContent.snp.makeConstraints {
 			$0.leading.top.equalTo(designLine1).offset(10)
+			$0.trailing.equalTo(designLine1).inset(10)
 		}
 		designLine2.snp.makeConstraints {
 			$0.leading.trailing.equalTo(contentView)

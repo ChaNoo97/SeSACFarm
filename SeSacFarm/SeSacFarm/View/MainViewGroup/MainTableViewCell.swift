@@ -59,6 +59,7 @@ class MainTableViewCell: UITableViewCell, ViewProtocol {
 		content.snp.makeConstraints {
 			$0.top.equalTo(writer.snp.bottom).offset(10)
 			$0.leading.equalTo(writer.snp.leading)
+			$0.trailing.equalTo(contentView).inset(10)
 		}
 		
 		date.snp.makeConstraints {

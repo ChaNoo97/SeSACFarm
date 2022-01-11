@@ -11,7 +11,6 @@ import SnapKit
 class PostView: UIView, ViewProtocol {
 	
 	let tableView = UITableView()
-	let bottomView = UIView()
 	let designLine = UIView()
 	let commentView = UIView()
 	let textView = UITextView()
@@ -45,16 +44,14 @@ class PostView: UIView, ViewProtocol {
 		sendButton.tintColor = .systemGray3
 		textView.layer.cornerRadius = 3
 		textView.font = .systemFont(ofSize: 18)
-		
-		bottomView.backgroundColor = .white
+		commentView.backgroundColor = .white
 		textView.backgroundColor = .systemGray3
 	}
 	
 	func setUpConstranits() {
-		[tableView, bottomView].forEach {
+		[tableView, commentView].forEach {
 			addSubview($0)
 		}
-		bottomView.addSubview(commentView)
 		
 		[textView, sendButton, designLine].forEach {
 			commentView.addSubview($0)
@@ -63,24 +60,20 @@ class PostView: UIView, ViewProtocol {
 		tableView.snp.makeConstraints {
 			$0.top.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
 		}
-		bottomView.snp.makeConstraints {
-			$0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-			$0.bottom.equalTo(self)
-			$0.height.equalTo(89)
-		}
+	
 		designLine.snp.makeConstraints {
 			$0.height.equalTo(1)
 			$0.leading.trailing.top.equalTo(commentView)
 		}
 		commentView.snp.makeConstraints {
-			$0.top.equalTo(bottomView.snp.top)
-			$0.leading.trailing.equalTo(bottomView)
-			$0.bottom.equalTo(self.snp.bottom).inset(40)
+			$0.bottom.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+			$0.height.greaterThanOrEqualTo(50)
 		}
 		textView.snp.makeConstraints {
 			$0.top.equalTo(commentView.snp.top).inset(5)
 			$0.leading.equalTo(commentView).inset(15)
 			$0.bottom.equalTo(commentView).inset(5)
+			$0.height.equalTo(40)
 			$0.trailing.equalTo(sendButton.snp.leading)
 		}
 		sendButton.snp.makeConstraints {

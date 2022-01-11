@@ -67,6 +67,7 @@ class PostCommentCell: UITableViewCell, ViewProtocol {
 		
 		comment.snp.makeConstraints {
 			$0.leading.equalTo(commentUserName.snp.leading)
+			$0.trailing.equalTo(contentView).inset(10)
 			$0.top.equalTo(commentUserName.snp.bottom).offset(5)
 			$0.bottom.equalTo(bottomView.snp.top)
 		}

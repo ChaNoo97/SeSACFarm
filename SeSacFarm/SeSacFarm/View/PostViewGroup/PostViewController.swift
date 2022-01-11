@@ -18,6 +18,12 @@ class PostViewController: BaseViewController {
 		self.view = mainView
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		viewModel.commentsGet {
@@ -43,9 +49,11 @@ class PostViewController: BaseViewController {
 		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
 		mainView.tableView.addGestureRecognizer(tap)
 		mainView.sendButton.isHidden = true
-		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardShow),name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 		mainView.sendButton.addTarget(self, action: #selector(sendButtonClicked), for: .touchUpInside)
+		
 	}
 	
 	@objc func modifyPostClicked() {
@@ -100,22 +108,23 @@ class PostViewController: BaseViewController {
 	}
 	
 	@objc func keyboardShow(notification: NSNotification) {
+
+		print(#function)
 		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-			if self.mainView.commentView.frame.origin.y == 0 {
-				self.mainView.commentView.frame.origin.y -= keyboardSize.height-40
-				self.mainView.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: keyboardSize.height+60)
-				mainView.tableView.tableFooterView = mainView.footerView
-			}
+			self.mainView.commentView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height+view.safeAreaInsets.bottom)
+			self.mainView.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: keyboardSize.height+60)
+			mainView.tableView.tableFooterView = mainView.footerView
+			
 		}
 	}
 	
 	@objc func keyboardHide(notification: NSNotification) {
+		print(#function)
 		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-			if self.mainView.commentView.frame.origin.y != 0 {
-				self.mainView.commentView.frame.origin.y += keyboardSize.height-40
-				self.mainView.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)
-				mainView.tableView.tableFooterView = mainView.footerView
-			}
+			self.mainView.commentView.transform = .identity
+			self.mainView.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)
+			mainView.tableView.tableFooterView = mainView.footerView
+			
 		}
 	}
 }
@@ -194,7 +203,29 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: TextViewDelegate
 extension PostViewController: UITextViewDelegate {
 	func textViewDidChange(_ textView: UITextView) {
+		print(textView.contentSize.height)
 		print(#function)
+		
+		if textView.contentSize.height <= 40 {
+			DispatchQueue.main.async {
+				self.mainView.textView.snp.updateConstraints {
+					$0.height.equalTo(40)
+				}
+			}
+				} else if textView.contentSize.height >= 102 {
+					DispatchQueue.main.async {
+						self.mainView.textView.snp.updateConstraints {
+							$0.height.equalTo(102)
+						}
+					}
+				} else {
+					let height = textView.contentSize.height
+					self.mainView.textView.snp.updateConstraints {
+						$0.height.equalTo(height)
+					}
+				}
+		
+		
 		if textView.text == "" {
 			self.mainView.sendButton.isHidden = true
 		} else {
@@ -205,7 +236,16 @@ extension PostViewController: UITextViewDelegate {
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
-		print(#function)
+		
+//		if textView.contentSize.height <= 35 {
+//			self.mainView.textView.snp.updateConstraints {
+//				$0.height.equalTo(35)
+//			}
+//		} else if textView.contentSize.height >= 102 {
+//				self.mainView.textView.snp.updateConstraints {
+//					$0.height.equalTo(102)
+//				}
+//		}
 	}
 	
 }
