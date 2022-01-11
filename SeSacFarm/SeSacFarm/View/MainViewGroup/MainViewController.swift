@@ -70,13 +70,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let row = indexPath.row
+		let row = mainViewModel.posts.value[indexPath.row]
 		let vc = PostViewController()
-		vc.viewModel.id = mainViewModel.posts.value[row].id
-//		vc.viewModel.content = mainViewModel.posts.value[row].text
-		vc.viewModel.date = mainViewModel.posts.value[row].updatedAt
-		vc.viewModel.name = mainViewModel.posts.value[row].user.username
+		vc.viewModel.id = row.id
+		vc.viewModel.date = row.updatedAt
+		vc.viewModel.name = row.user.username
 		navigationController?.pushViewController(vc, animated: true)
 	}
-	
+	 
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		self.mainViewModel.postsGet {
+			self.mainView.tableView.reloadData()
+			
+			self.view.makeToast("피드 새로고침", duration: 1.0)
+		}
+	}
 }

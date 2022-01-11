@@ -101,6 +101,10 @@ class PostViewController: BaseViewController {
 		mainView.textView.text = ""
 		viewModel.writeComments.value = ""
 		mainView.sendButton.isHidden = true
+		
+		self.mainView.textView.snp.updateConstraints {
+			$0.height.equalTo(40)
+		}
 	}
 	
 	@objc func dismissKeyboard() {
@@ -114,18 +118,14 @@ class PostViewController: BaseViewController {
 			self.mainView.commentView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height+view.safeAreaInsets.bottom)
 			self.mainView.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: keyboardSize.height+60)
 			mainView.tableView.tableFooterView = mainView.footerView
-			
 		}
 	}
 	
 	@objc func keyboardHide(notification: NSNotification) {
 		print(#function)
-		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 			self.mainView.commentView.transform = .identity
 			self.mainView.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)
 			mainView.tableView.tableFooterView = mainView.footerView
-			
-		}
 	}
 }
 
@@ -169,15 +169,16 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	@objc func settingButtonClicked(_ sender: UIButton) {
+		dismissKeyboard()
 		let alert = UIAlertController(title: "댓글수정", message: "선택해주세요", preferredStyle: .actionSheet)
 		
-		let checkStandard = UIAlertAction(title: "수정", style: .default) { action in
+		let modification = UIAlertAction(title: "수정", style: .default) { action in
 			let vc = CommentModifyViewController()
 			vc.viewModel.commentId = self.viewModel.comments.value[sender.tag].id
 			vc.viewModel.postId = self.viewModel.id
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
-		let favoriteStandard = UIAlertAction(title: "삭제", style: .destructive) { action in
+		let delete = UIAlertAction(title: "삭제", style: .destructive) { action in
 		let id = self.viewModel.comments.value[sender.tag].id
 			self.viewModel.deleteComment(commentId: id) {
 			let alert = UIAlertController(title: "", message: "삭제되었습니다.", preferredStyle: .alert)
@@ -192,9 +193,10 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 				self.present(alert, animated: true, completion: nil)
 			}
 		}
-		alert.addAction(checkStandard)
-		alert.addAction(favoriteStandard)
-
+		let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+		alert.addAction(modification)
+		alert.addAction(delete)
+		alert.addAction(cancel)
 		present(alert, animated: true, completion: nil)
 	}
 	
@@ -203,7 +205,6 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: TextViewDelegate
 extension PostViewController: UITextViewDelegate {
 	func textViewDidChange(_ textView: UITextView) {
-		print(textView.contentSize.height)
 		print(#function)
 		
 		if textView.contentSize.height <= 40 {
@@ -233,19 +234,6 @@ extension PostViewController: UITextViewDelegate {
 			self.mainView.sendButton.tintColor = .green
 		}
 		viewModel.writeComments.value = textView.text ?? ""
-	}
-	
-	func textViewDidEndEditing(_ textView: UITextView) {
-		
-//		if textView.contentSize.height <= 35 {
-//			self.mainView.textView.snp.updateConstraints {
-//				$0.height.equalTo(35)
-//			}
-//		} else if textView.contentSize.height >= 102 {
-//				self.mainView.textView.snp.updateConstraints {
-//					$0.height.equalTo(102)
-//				}
-//		}
 	}
 	
 }
