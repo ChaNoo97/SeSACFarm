@@ -112,9 +112,10 @@ class PostViewController: BaseViewController {
 	}
 	
 	@objc func keyboardShow(notification: NSNotification) {
-
 		print(#function)
 		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+			print("bound",self.mainView.commentView.bounds)
+			print("frame",self.mainView.commentView.frame)
 			self.mainView.commentView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height+view.safeAreaInsets.bottom)
 			self.mainView.footerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: keyboardSize.height+60)
 			mainView.tableView.tableFooterView = mainView.footerView

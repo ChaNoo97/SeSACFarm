@@ -31,6 +31,9 @@ class MainViewController: BaseViewController {
 		
 		mainView.tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
 		
+		mainView.tableView.refreshControl = UIRefreshControl()
+		mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+		
 		mainView.tableView.delegate = self
 		mainView.tableView.dataSource = self
 		mainView.tableView.rowHeight = UITableView.automaticDimension
@@ -77,12 +80,24 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		vc.viewModel.name = row.user.username
 		navigationController?.pushViewController(vc, animated: true)
 	}
-	 
-	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+	
+	@objc func refreshTableView() {
 		self.mainViewModel.postsGet {
 			self.mainView.tableView.reloadData()
-			
 			self.view.makeToast("피드 새로고침", duration: 1.0)
 		}
+		self.mainView.tableView.refreshControl?.endRefreshing()
 	}
+	
+	 
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		print(#function)
+
+//		self.mainViewModel.postsGet {
+//			self.mainView.tableView.reloadData()
+//
+//			self.view.makeToast("피드 새로고침", duration: 1.0)
+//		}
+	}
+
 }
