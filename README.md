@@ -1,9 +1,15 @@
 # SeSACFarm
 ## 어플소개
+- 새싹 수강생들이 함께 이용할수 있는 커뮤니티 앱 입니다.
+
+## 기술스택
+`MVVM` `SnapKit` `RESTAPI` `URLSession` `Codable`
+### 상세설명
 - MVVM 패턴을 처음으로 적용했습니다.
 - codeBaseUI 로 Snapkit 을 사용하여 만들었습니다.
 - tableView의 extension과 ReuseableView Protocol을 만들어서 identifier처리를 자동적으로 할수 있게 구현했습니다.
 - URLSession 으로 RestAPI 를 구현하고, CRUD를 모두 구현했습니다.
+- URLSession 의 request 를 Generic타입을 이용하여 Decodable이 용이하도록 구현했습니다.
 - 회원가입 및 로그인을 구현 했습니다.
 - 로그인시 토큰이 생성되며 토큰이 만료될시 글 작성/수정, 댓글 작성/수정이 불가능하며, 메인화면으로 이동합니다.
 - 글과 댓글 모두 작성/수정/삭제가 가능합니다.
