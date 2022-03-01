@@ -88,16 +88,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 		self.mainView.tableView.refreshControl?.endRefreshing()
 	}
-	
-	 
-	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-		print(#function)
-
-//		self.mainViewModel.postsGet {
-//			self.mainView.tableView.reloadData()
-//
-//			self.view.makeToast("피드 새로고침", duration: 1.0)
-//		}
-	}
 
 }

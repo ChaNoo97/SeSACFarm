@@ -58,7 +58,7 @@ class PostView: UIView, ViewProtocol {
 		}
 	
 		tableView.snp.makeConstraints {
-			$0.top.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
+			$0.edges.equalTo(self.safeAreaLayoutGuide)
 		}
 	
 		designLine.snp.makeConstraints {
