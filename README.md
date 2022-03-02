@@ -18,6 +18,11 @@
 - 실시간 정보를 확인하기 위해서 당겨서 새로고침 기능이 있습니다.
 - 모든화면에 키보드 대응이 되어 있습니다.
 
+## 트러블슈팅
+- 댓글 달기 키보드 화면에서 키보드가 늦게 따라 올라오는 문제가 있었습니다. Notification Oserver 를 keyboardDidChangeFrameNotification -> keyboardWillChangeFrameNotification 변경하여 해결 했습니다.
+- 댓글 달기 화면에서 키보드의 높이만큼 화면을 올려주는 과정에서 많은 생각이 있었습니다. 테이블뷰의 bottomView 의 높이를 동적으로 변경해주는 방법으로 해결했습니다.
+- tableViewCell 의 높이를 동적 높이를 적용 했는데 제대로 구현이 안되었습니다. cell 내부의 ui 를 잡을때 top, bottom 모두 잡아주는것으로 해결했습니다.
+
 ## 구현사진
 |로그인화면|글쓰기 화면|댓글쓰기 화면|
 |----|----|----|
@@ -27,8 +32,3 @@
 |-----|----|
 |<img src="https://user-images.githubusercontent.com/89408824/156129620-6ec49ee9-3cd4-431b-b22c-e649b18593eb.gif" width="210" height="350"/>| <img src="https://user-images.githubusercontent.com/89408824/156141604-43350097-d268-4937-8652-4bfc62a3c8bd.gif" width="210" height="350"/>|
 - 댓글 수정/삭제 도 같은 프로세스로 진행됩니다.
-
-## 트러블슈팅
-- 댓글 달기 키보드 화면에서 키보드가 늦게 따라 올라오는 문제가 있었습니다. Notification Oserver 를 keyboardDidChangeFrameNotification -> keyboardWillChangeFrameNotification 변경하여 해결 했습니다.
-- 댓글 달기 화면에서 키보드의 높이만큼 화면을 올려주는 과정에서 많은 생각이 있었습니다. 테이블뷰의 bottomView 의 높이를 동적으로 변경해주는 방법으로 해결했습니다.
-- tableViewCell 의 높이를 동적 높이를 적용 했는데 제대로 구현이 안되었습니다. cell 내부의 ui 를 잡을때 top, bottom 모두 잡아주는것으로 해결했습니다.
